@@ -4,32 +4,41 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.interceptor.Interceptor;
+import javax.interceptor.Interceptors;
 
+import edu.starterkit.aop.Logger;
+import edu.starterkit.aop.LoggerInterceptor;
 import edu.starterkit.dao.BookDao;
+import edu.starterkit.dao.impl.BookDaoHibernateImpl;
+import edu.starterkit.qualifiers.DaoImpl;
+import edu.starterkit.qualifiers.HibernateImpl;
 import edu.starterkit.service.BookService;
 import edu.starterkit.to.BookTo;
 
 public class BookServiceImpl implements BookService {
 
 	@Inject
+	@DaoImpl
 	private BookDao bookDao;
 
-	@Override
+	@Override @Logger
 	public List<BookTo> findAllBooks() {
 		return bookDao.findAll();
 	}
 
-	@Override
+//	@Interceptors({LoggerInterceptor.class}) inny sposob
+	@Override @Logger
 	public List<BookTo> findBooksByTitle(String title) {
 		return bookDao.findBookByTitle(title);
 	}
 
-	@Override
+	@Override @Logger
 	public List<BookTo> findBooksByAuthor(String author) {
 		return bookDao.findBooksByAuthor(author);
 	}
 
-	@Override
+	@Override @Logger
 	public BookTo saveBook(BookTo book) {
 		return bookDao.save(book);
 	}

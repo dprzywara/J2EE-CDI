@@ -5,6 +5,7 @@
 
 	<interceptors>
 		<class>edu.starterkit.aop.BookDaoAdvisor</class>
+		<class>edu.starterkit.aop.LoggerInterceptor</class>
 	</interceptors>
 
 </beans>
